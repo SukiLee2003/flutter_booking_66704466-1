@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'room_list.dart';
+import 'room_crud.dart';
 
 
 class LoginAdmin extends StatefulWidget {
@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginAdmin> {
   bool isPasswordHidden = true;
 
   Future login() async {
-    var url = Uri.parse("http://localhost/flutter_booking_66704466/php_api/login.php");
+    var url = Uri.parse("http://localhost/flutter_booking_66704466/php_api/login_admin.php");
 
     var response = await http.post(
       url,
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginAdmin> {
     if (data["status"] == "success") {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => RoomList(name: data["name"],)) //เพิ่มการส่งค่า name ไปยัง rome_list.dart
+        MaterialPageRoute(builder: (context) => RoomPage(name: data["name"],)) //เพิ่มการส่งค่า name ไปยัง rome_list.dart
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
